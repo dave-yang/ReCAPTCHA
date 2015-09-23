@@ -1,56 +1,56 @@
 <?php
 
 /**
- * ReCAPTCHA Provider
+ * ReCAPTCHA Service
  * 
  * Copyright (c) No Global State Lab
  * 
  * Licensed under BSD-3
  */
 
-class ReCaptcha
+final class ReCaptcha
 {
 	/**
 	 * Last error message
 	 * 
 	 * @var string
 	 */
-	protected $error = null;
+	private $error = null;
 
 	/**
 	 * User-provided public key
 	 * 
 	 * @var string
 	 */
-	protected $publicKey;
+	private $publicKey;
 
 	/**
 	 * User-provided private key
 	 * 
 	 * @var string
 	 */
-	protected $privateKey;
+	private $privateKey;
 
 	/**
 	 * Whether SSL is used or not
 	 * 
 	 * @var boolean
 	 */
-	protected $ssl;
+	private $ssl;
 
 	/**
 	 * Client's IP address
 	 * 
 	 * @var string
 	 */
-	protected $ip;
+	private $ip;
 
 	/**
 	 * Additional parameters when asking a response from the server
 	 * 
 	 * @var array
 	 */
-	protected $extra = array();
+	private $extra = array();
 
 	const RECAPTCHA_API_SECURE_SERVER = 'https://www.google.com/recaptcha/api';
 	const RECAPTCHA_API_SERVER = 'http://www.google.com/recaptcha/api';
@@ -151,7 +151,7 @@ class ReCaptcha
 	 * @param string $response
 	 * @return array
 	 */
-	protected function getServiceResponse($challenge, $response)
+	private function getServiceResponse($challenge, $response)
 	{
 		$data = array(
 			'privatekey' => $this->privateKey,
@@ -170,7 +170,7 @@ class ReCaptcha
 	 * 
 	 * @return string
 	 */
-	protected function getServer()
+	private function getServer()
 	{
 		return $this->ssl !== false ? self::RECAPTCHA_API_SECURE_SERVER : self::RECAPTCHA_API_SERVER;
 	}
@@ -181,7 +181,7 @@ class ReCaptcha
 	 * @param string $type Either 'challenge' or 'noscript'
 	 * @return string
 	 */
-	protected function getServiceUrl($type)
+	private function getServiceUrl($type)
 	{
 		if ($this->error !== null) {
 			$error = "&amp;error=" . $this->error;
@@ -200,7 +200,7 @@ class ReCaptcha
 	 * @throws RuntimeException When connection isn't available
 	 * @return array
 	 */
-	protected function request($host, $path, array $data, $port = 80)
+	private function request($host, $path, array $data, $port = 80)
 	{
 		$query = http_build_query($data);
 
