@@ -3,7 +3,7 @@
 /**
  * ReCAPTCHA Provider
  * 
- * (c) David Yang
+ * Copyright (c) No Global State Lab
  * 
  * Licensed under BSD-3
  */
