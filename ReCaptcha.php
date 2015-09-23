@@ -129,16 +129,14 @@ final class ReCaptcha
 			$this->error = 'incorrect-captcha-sol';
 			return false;
 		}
-		
+
 		$raw = $this->getServiceResponse($challenge, $target);
-		
+
 		$response = explode ("\n", $raw[1]);
-		
+
 		if (isset($response[0]) &&  trim($response[0] == 'true')) {
 			return true;
-			
 		} else {
-			
 			$this->error = $response[1];
 			return false;
 		}
@@ -225,7 +223,6 @@ final class ReCaptcha
 		}
 
 		fwrite($sock, $data);
-
 		$response = '';
 
 		while (!feof($sock)) {
